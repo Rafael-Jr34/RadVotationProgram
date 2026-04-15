@@ -361,3 +361,29 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Secrets and sensitive configuration
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/secrets.json
+**/*.pfx
+**/*.p12
+
+# Entity Framework migrations generated locally
+**/Migrations/
+
+# Publish folder
+/publish/
+**/publish/
+
+# More specific test results
+**/TestResults/
+**/*.trx
+**/*.coverage
+
+# SonarQube
+.sonarqube/
+
+# Local environment files
+.env
+.env.local
