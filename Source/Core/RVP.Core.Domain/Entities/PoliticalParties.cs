@@ -12,11 +12,11 @@ namespace RVP.Core.Domain.Entities
         public required int Acronym { get; set; }
         public required byte Logo { get; set; }
 
-        public virtual ICollection<Alliance>? AllianceIdRecruter { get; set; }
-        public virtual ICollection<Alliance>? AllianceIdSender { get; set; }
-        public virtual ICollection<Candidate>? Candidates { get; set; }
-        public virtual ICollection<ElectionParties>? ElectionParties { get; set; }
-        public virtual ICollection<PoliticalLeaders>? PoliticalLeader { get; set; }
+        public  ICollection<Alliance>? AllianceIdRecruter { get; set; }
+        public  ICollection<Alliance>? AllianceIdSender { get; set; }
+        public  ICollection<Candidate>? Candidates { get; set; }
+        public  ICollection<ElectionParties>? ElectionParties { get; set; }
+        public  ICollection<PoliticalLeaders>? PoliticalLeader { get; set; }
 
     }
 }

@@ -14,10 +14,10 @@ namespace RVP.Core.Domain.Entities
         public required int IdElectedPosition { get; set; }
         public required int IdElection { get; set; }
 
-        public virtual Candidate? Candidate { get; set; }
-        public virtual ElectionParties? ElectionParty { get; set; }
-        public virtual ElectedPosition? ElectedPosition { get; set; }
-        public virtual Election? Election { get; set; }
-        public virtual ICollection<Votes>? Votes { get; set; }
+        public  Candidate? Candidate { get; set; }
+        public  ElectionParties? ElectionParty { get; set; }
+        public  ElectedPosition? ElectedPosition { get; set; }
+        public  Election? Election { get; set; }
+        public  ICollection<Votes>? Votes { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace RVP.Core.Domain.Entities
         public required int IDCandidate { get; set; }
         public required int IdElectedPosition { get; set; }
 
-        public virtual Candidate? Candidate { get; set; }
-        public virtual ElectedPosition? ElectedPosition { get; set; }
+        public  Candidate? Candidate { get; set; }
+        public  ElectedPosition? ElectedPosition { get; set; }
     }
 }

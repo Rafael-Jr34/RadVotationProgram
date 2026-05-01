@@ -11,9 +11,9 @@ namespace RVP.Core.Domain.Entities
     { //parties that are in an actual election
         public required int IdElection { get; set; }
         public required int IdPoliticalParty { get; set; }
-        public virtual ICollection<ElectionCandidates>? ElectionCandidates { get; set; }
-        public virtual Election? Election { get; set; }
-        public virtual PoliticalParties? PoliticalParty { get; set; }
+        public  ICollection<ElectionCandidates>? ElectionCandidates { get; set; }
+        public  Election? Election { get; set; }
+        public  PoliticalParties? PoliticalParty { get; set; }
     }
 
 }

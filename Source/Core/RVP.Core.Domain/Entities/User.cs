@@ -13,6 +13,6 @@ namespace RVP.Core.Domain.Entities
         public required byte Role { get; set; }
         // 1- admin / 2- politicalLeader
         public required string username { get; set; }
-        public virtual ICollection<PoliticalLeaders>? PoliticalLeaders { get; set; }
+        public  PoliticalLeaders? PoliticalLeaders { get; set; }
     }
 }

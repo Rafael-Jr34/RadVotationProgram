@@ -12,8 +12,8 @@ namespace RVP.Core.Domain.Entities
         public required int IdElection { get; set; }
         public required int IdElectedPosition { get; set; }
 
-        public virtual ICollection<Votes>? Votes { get; set; }
-        public virtual Election? Election { get; set; }
-        public virtual ElectedPosition? ElectedPosition { get; set; }
+        public  ICollection<Votes>? Votes { get; set; }
+        public  Election? Election { get; set; }
+        public  ElectedPosition? ElectedPosition { get; set; }
     }
 }

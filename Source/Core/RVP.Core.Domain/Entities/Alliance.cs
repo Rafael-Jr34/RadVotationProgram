@@ -16,8 +16,8 @@ namespace RVP.Core.Domain.Entities
          1- accepted
          2- refused
          */
-        public virtual PoliticalParties? IdRecruter { get; set; }
-        public virtual PoliticalParties? IdSender { get; set; }
+        public  PoliticalParties? IdRecruter { get; set; }
+        public  PoliticalParties? IdSender { get; set; }
 
     }
 }

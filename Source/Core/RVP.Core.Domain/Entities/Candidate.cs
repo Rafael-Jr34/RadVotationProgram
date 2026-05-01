@@ -12,8 +12,8 @@ namespace RVP.Core.Domain.Entities
     {
         public required byte Photo { get; set; }
         public required int IdParty { get; set; }//party who created it
-        public virtual PoliticalParties? PoliticalParties { get; set; }
-        public virtual ICollection<CandidatePosition>? CandidatePositions { get; set; }
-        public virtual ICollection<ElectionCandidates>? ElectionCandidates { get; set; }
+        public  PoliticalParties? PoliticalParties { get; set; }
+        public  ICollection<CandidatePosition>? CandidatePositions { get; set; }
+        public  ICollection<ElectionCandidates>? ElectionCandidates { get; set; }
     }
 }

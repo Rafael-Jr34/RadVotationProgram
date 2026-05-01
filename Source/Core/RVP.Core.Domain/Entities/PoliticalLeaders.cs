@@ -11,7 +11,7 @@ namespace RVP.Core.Domain.Entities
     {
         public required int IdPoliticalParty { get; set; }
         public required int IdLeader { get; set; }
-        public virtual PoliticalParties? PoliticalParty { get; set; }
-        public virtual User? Leader { get; set; }
+        public  PoliticalParties? PoliticalParty { get; set; }
+        public  User? Leader { get; set; }
     }
 }

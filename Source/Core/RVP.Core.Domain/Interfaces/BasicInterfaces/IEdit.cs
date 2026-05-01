@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RVP.Core.Domain.Interfaces.BasicInterfaces
 {
     public interface IEdit<T>: GenericInterface<T> where T: class
-    {// some entities musnt edit, so this is for the  ones that can
+    {// some entities mustn't edit, so this is for the  ones that can
         void Edit(T entity);
     }
 }

@@ -15,9 +15,9 @@ namespace RVP.Core.Domain.Entities
         public required bool VoteNoOne { get; set; } //To know if the vote is for no one
         public required int IdElectionPosition { get; set; } //Position for vote 
 
-        public virtual ElectionCandidates? ElectionCandidates { get; set; }
-        public virtual Citizen? Citizen { get; set; }
-        public virtual ElectionPosition? ElectionPosition { get; set; }
+        public  ElectionCandidates? ElectionCandidates { get; set; }
+        public  Citizen? Citizen { get; set; }
+        public  ElectionPosition? ElectionPosition { get; set; }
 
 
     }

@@ -10,8 +10,8 @@ namespace RVP.Core.Domain.Entities
     //this are the positions that the candidates can run for
     public class ElectedPosition: DescriptionEntity
     {
-        public virtual ICollection<CandidatePosition>? CandidatePositions { get; set; }
-        public virtual ICollection<ElectionCandidates>? ElectionCandidates { get; set; }
-        public virtual ICollection<ElectionPosition>? ElectionPosition { get; set; }
+        public  ICollection<CandidatePosition>? CandidatePositions { get; set; }
+        public  ICollection<ElectionCandidates>? ElectionCandidates { get; set; }
+        public  ICollection<ElectionPosition>? ElectionPosition { get; set; }
     }
 }
