@@ -9,7 +9,7 @@ namespace RVP.Core.Domain.Entities
 {
    public class PoliticalParties: DescriptionEntity
     {
-        public required int Acronym { get; set; }
+        public required string Acronym { get; set; }
         public required byte Logo { get; set; }
 
         public  ICollection<Alliance>? AllianceIdRecruter { get; set; }

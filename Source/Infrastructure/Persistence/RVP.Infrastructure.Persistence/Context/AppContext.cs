@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RVP.Core.Domain.Entities;
 using RVP.Infrastructure.Persistence.EntityConfigurations;
+using System.Reflection;
 
 namespace RVP.Infrastructure.Persistence.Context
 {
@@ -26,7 +27,26 @@ namespace RVP.Infrastructure.Persistence.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder); //liskov substitution principle
+            #region Aplying Entity Configurations on model builder
+            /*
+            modelBuilder.ApplyConfiguration(new AllianceEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new CandidateEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new CandidatePositionEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new CitizenEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ElectedPositionEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ElectionEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ElectionCandidatesEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ElectionPartiesEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ElectedPositionEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new PoliticalLeadersEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new PoliticalPartiesEntityConfiguration());
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new VotesEntityConfiguration());
+            You could make all of this or just use the assembly method to apply all configurations in the assembly
+            */
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            #endregion
+
             // Configure relationships and constraints
         }
 
