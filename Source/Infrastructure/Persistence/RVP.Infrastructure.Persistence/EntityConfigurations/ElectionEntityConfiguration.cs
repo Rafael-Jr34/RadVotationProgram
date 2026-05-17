@@ -24,15 +24,15 @@ namespace RVP.Infrastructure.Persistence.EntityConfigurations
             builder.HasMany<ElectionParties>(el=>el.ElectionParties)
                 .WithOne(ep => ep.Election)
                 .HasForeignKey(ep => ep.IdElection)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
             builder.HasMany<ElectionCandidates>(el => el.ElectionCandidates)
                 .WithOne(ec => ec.Election)
                 .HasForeignKey(ec => ec.IdElection)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
             builder.HasMany<ElectionPosition>(el => el.ElectionPositions)
                 .WithOne(ep => ep.Election)
                 .HasForeignKey(ep => ep.IdElection)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
         }

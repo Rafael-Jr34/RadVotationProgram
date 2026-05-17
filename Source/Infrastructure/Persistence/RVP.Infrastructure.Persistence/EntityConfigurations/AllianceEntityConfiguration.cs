@@ -17,17 +17,20 @@ namespace RVP.Infrastructure.Persistence.EntityConfigurations
             builder.ToTable("Aliances");
             #endregion
 
-            
+
             #region Relationship configuration
             builder.HasOne(a => a.Sender)
             .WithMany(pp => pp.AllianceIdSender)
-            .HasForeignKey(a=>a.IdSender)
-            .OnDelete(DeleteBehavior.Cascade);
+            .HasForeignKey(a => a.IdSender)
+            .OnDelete(DeleteBehavior.NoAction);
+
+
 
             builder.HasOne(a => a.Recruter)
            .WithMany(pp => pp.AllianceIdRecruter)
            .HasForeignKey(a => a.IdRecruter)
-           .OnDelete(DeleteBehavior.Cascade);
+           .OnDelete(DeleteBehavior.NoAction);
+                       
 
 
             #endregion

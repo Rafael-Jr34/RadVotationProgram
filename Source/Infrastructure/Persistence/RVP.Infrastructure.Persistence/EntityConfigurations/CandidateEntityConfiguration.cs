@@ -25,11 +25,11 @@ namespace RVP.Infrastructure.Persistence.EntityConfigurations
             builder.HasMany<CandidatePosition>(ca => ca.CandidatePositions)
                 .WithOne(cp => cp.Candidate)
                 .HasForeignKey(cp => cp.IDCandidate)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
             builder.HasMany<ElectionCandidates>(ca => ca.ElectionCandidates)
                 .WithOne(ec => ec.Candidate)
                 .HasForeignKey(ec => ec.IdCandidate)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
 
             #endregion

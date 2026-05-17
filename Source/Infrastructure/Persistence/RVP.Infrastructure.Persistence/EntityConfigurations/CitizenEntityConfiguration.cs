@@ -21,12 +21,13 @@ namespace RVP.Infrastructure.Persistence.EntityConfigurations
             builder.Property(ci => ci.LastName).IsRequired().HasMaxLength(90);
             builder.Property(ci => ci.Name).IsRequired().HasMaxLength(90);
             builder.Property(ci =>ci.Email).IsRequired().HasMaxLength(100);
+            #endregion
 
             #region Relationship configuration
             builder.HasMany<Votes>(ci => ci.Votes)
                 .WithOne(v => v.Citizen)
                 .HasForeignKey(v => v.IdCitizen)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
         }

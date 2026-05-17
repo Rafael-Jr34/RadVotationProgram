@@ -22,7 +22,7 @@ namespace RVP.Infrastructure.Persistence.EntityConfigurations
             builder.HasMany<Votes>(ec => ec.Votes)
                 .WithOne(v=>v.ElectionCandidates)
                 .HasForeignKey(v => v.IdElectionCandidate)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
         }
