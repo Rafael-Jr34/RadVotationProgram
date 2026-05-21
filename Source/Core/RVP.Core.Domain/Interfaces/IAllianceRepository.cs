@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RVP.Core.Domain.Entities.Interfaces
 {
-     public  interface IAlliance: IEdit<Alliance>
+     public  interface IAllianceRepository: IEdit<Alliance>
     {
     }
 }

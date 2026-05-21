@@ -6,9 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RVP.Core.Domain.Interfaces
+namespace RVP.Core.Application.Interfaces
 {
-   public  interface IElectedPosition: IEdit<ElectedPosition>
-    {
-    }
+   public  interface IElectionCandidatesService { }
+    
 }

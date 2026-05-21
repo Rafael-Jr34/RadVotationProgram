@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RVP.Core.Domain.Interfaces
 {
-   public  interface IVotes: IEdit<Votes>
+   public  interface IElectionRepository: IGenericRepository<Election>
     {
     }
 }

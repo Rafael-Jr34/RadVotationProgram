@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RVP.Core.Domain.Interfaces
+namespace RVP.Core.Application.Interfaces
 {
-   public  interface IPoliticalLeaders: GenericInterface<PoliticalLeaders>
+   public  interface ICandidatePositionService
     {
     }
 }

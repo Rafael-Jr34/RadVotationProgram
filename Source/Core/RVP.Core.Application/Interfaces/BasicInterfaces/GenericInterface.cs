@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RVP.Core.Domain.Interfaces.BasicInterfaces
+namespace RVP.Core.Application.Interfaces.BasicInterfaces
 {
   public   interface GenericInterface<T>  where T: class
     {

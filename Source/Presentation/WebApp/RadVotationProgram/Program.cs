@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using RVP.Infrastructure.Persistence;
 using RVP.Infrastructure.Persistence.Context;
+
+
 namespace RadVotationProgram
 {
     public class Program
@@ -10,8 +13,8 @@ namespace RadVotationProgram
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<AppDBContext>(opt =>opt.UseSqlServer(connectionString));
+            builder.Services.AddPersistenceLayerIoc(builder.Configuration);
+            builder.Services.AddServiceLayerIoc();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
