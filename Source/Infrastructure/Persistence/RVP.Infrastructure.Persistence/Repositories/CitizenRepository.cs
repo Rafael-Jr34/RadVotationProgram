@@ -15,6 +15,6 @@ namespace RVP.Infrastructure.Persistence.Repositories
         public CitizenRepository(AppDBContext context) : base(context)
         {
         }
-    {
+    
     }
 }

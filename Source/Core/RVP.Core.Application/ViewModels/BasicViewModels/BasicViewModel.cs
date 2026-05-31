@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RVP.Core.Domain.Entities.BasicDtos
+namespace RVP.Core.Domain.Entities.BasicViewModels
 {
-    public abstract class BasicDto
+   public abstract class BasicViewModel
     {
         public required int Id { get; set; }
         public required bool IsActive { get; set; }

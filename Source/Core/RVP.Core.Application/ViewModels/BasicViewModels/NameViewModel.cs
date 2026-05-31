@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RVP.Core.Domain.Entities.BasicDtos
+namespace RVP.Core.Domain.Entities.BasicViewModels
 {
-    public abstract class NameDto: BasicDto
+    public abstract class NameViewModel: BasicViewModel
     {
         public required string Name { get; set; }
     }

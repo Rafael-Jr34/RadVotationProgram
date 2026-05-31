@@ -1,0 +1,53 @@
+﻿@model List<UserViewModel>
+@{
+    ViewData["Title"] = "User Maintenance";
+}
+
+<div class="container text-center">
+    <div class="row align-items-start">
+        <div class="col">
+            Name
+        </div>
+        <div class="col">
+            LastName
+        </div>
+        <div class="col">
+            Email
+        </div>
+        <div class="col">
+            UserName
+        </div>
+        <div class="col">
+            State
+        </div>
+        <div class="col">
+            Actions
+        </div>
+    </div>
+    @foreach (var user in Model)
+    {
+        <div class="row align-items-start">
+            <div class="col">
+                @user.Name
+            </div>
+            <div class="col">
+                @user.LastName
+            </div>
+            <div class="col">
+                @user.Email
+            </div>
+            <div class="col">
+                @user.Username
+            </div>
+            <div class="col">
+                <span class="badge @(user.IsActive == true ? "bg-success" : "bg-danger")">
+                    @(user.IsActive == true ? "Active" : "InActive")
+                </span>
+            </div>
+            <div class="col">
+                <a asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+            </div>
+        </div>
+	}
+</div>

@@ -18,7 +18,7 @@ namespace RVP.Infrastructure.Persistence.EntityConfigurations
             #endregion
 
             #region Property configuration
-            builder.Property(u => u.username).IsRequired().HasMaxLength(90);
+            builder.Property(u => u.Username).IsRequired().HasMaxLength(90);
             builder.Property(u => u.LastName).IsRequired().HasMaxLength(90);
             builder.Property(u => u.Name).IsRequired().HasMaxLength(90);
             builder.Property(u => u.Password).IsRequired().HasMaxLength(200);   

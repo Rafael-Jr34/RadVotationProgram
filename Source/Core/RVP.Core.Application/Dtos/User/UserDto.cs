@@ -1,4 +1,4 @@
-﻿using RVP.Core.Domain.Entities.BasicEntities;
+﻿using  RVP.Core.Domain.Entities.BasicDtos;
 
 namespace RVP.Core.Application.Dtos.User
 {
@@ -7,6 +7,6 @@ namespace RVP.Core.Application.Dtos.User
         public required string Password { get; set; }
         public required byte Role { get; set; }
         // 1- admin / 2- politicalLeader
-        public required string username { get; set; }
+        public required string Username { get; set; }
     }
 }

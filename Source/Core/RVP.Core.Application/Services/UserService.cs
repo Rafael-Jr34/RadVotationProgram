@@ -30,7 +30,7 @@ namespace RVP.Core.Application.Services
                     LastName = dto.LastName,
                     Password = dto.Password,
                     Role = dto.Role,
-                    username = dto.username
+                    Username = dto.Username
                 };
                 User? returnEntity = await _userRepository.AddAsync(entity);
                 if (returnEntity == null)
@@ -85,7 +85,7 @@ namespace RVP.Core.Application.Services
                     LastName = dto.LastName,
                     Password = dto.Password,
                     Role = dto.Role,
-                    username = dto.username
+                    Username = dto.Username
                 };
                User? returnEntity = await _userRepository.Edit(entity.Id, entity);
                 if (returnEntity == null)
@@ -115,7 +115,7 @@ namespace RVP.Core.Application.Services
                     LastName = entity.LastName,
                     Password = entity.Password,
                     Role = entity.Role,
-                    username = entity.username
+                    Username = entity.Username
                 }).ToList();
 
                 return listEntitiesDto;
@@ -141,7 +141,7 @@ namespace RVP.Core.Application.Services
                     LastName = entity.LastName,
                     Password = entity.Password,
                     Role = entity.Role,
-                    username = entity.username
+                    Username = entity.Username
                 }).ToList();
 
                 // tenrary operartor: this != null ? that : listEntitiesDto;
@@ -177,7 +177,7 @@ namespace RVP.Core.Application.Services
                     LastName = returnEntity.LastName,
                     Password = returnEntity.Password,
                     Role = returnEntity.Role,
-                    username = returnEntity.username
+                    Username = returnEntity.Username
                 };
                 return dto;
             }
