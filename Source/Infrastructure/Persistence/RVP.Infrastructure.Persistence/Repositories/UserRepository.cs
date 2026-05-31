@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RVP.Infrastructure.Persistence.Repository
+namespace RVP.Infrastructure.Persistence.Repositories
 {
-  public  class UserRepository: EditRepository<User, AppDBContext>, IUserRepository
+    public  class UserRepository: EditRepository<User>, IUserRepository
     {
         public UserRepository(AppDBContext context) : base(context)
         {

@@ -3,11 +3,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RVP.Core.Domain.Entities.Interfaces;
 using RVP.Core.Domain.Interfaces;
+using RVP.Core.Domain.Interfaces.BasicInterfaces;
 using RVP.Infrastructure.Persistence.Context;
 using RVP.Infrastructure.Persistence.Repositories;
-using RVP.Infrastructure.Persistence.Repository;
+using RVP.Infrastructure.Persistence.Repositories.Basic_repositories;
 
- 
 
 namespace RVP.Infrastructure.Persistence
 {
@@ -35,7 +35,7 @@ namespace RVP.Infrastructure.Persistence
 
 
             #endregion
-            #region Repositorios IOC
+            #region Repositories IOC
             services.AddTransient<IPoliticalPartiesRepository, PoliticalPartiesRepository>();
             services.AddTransient<IPoliticalLeadersRepository, PoliticalLeadersRepository>();
             services.AddTransient<IElectionPartiesRepository, ElectionPartiesRepository>();
@@ -49,6 +49,7 @@ namespace RVP.Infrastructure.Persistence
             services.AddTransient<IElectionRepository, ElectionRepository>();
             services.AddTransient<IElectionCandidatesRepository, ElectionCandidatesRepository>();
             services.AddTransient<IVotesRepository, VotesRepository>();
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             
             #endregion
         }

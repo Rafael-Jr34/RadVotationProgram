@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RVP.Infrastructure.Persistence.Repository
+namespace RVP.Infrastructure.Persistence.Repositories
 {
-  public  class CitizenRepository: EditRepository<Citizen, AppDBContext>, ICitizenRepository
+    public  class CitizenRepository: EditRepository<Citizen>, ICitizenRepository
     {
         public CitizenRepository(AppDBContext context) : base(context)
         {

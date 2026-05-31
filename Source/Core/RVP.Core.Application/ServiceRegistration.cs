@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RVP.Core.Application.Interfaces;
 using RVP.Core.Application.Services;
-using RVP.Core.Application.Servicies;
+   
 
 
 namespace RVP.Infrastructure.Persistence
@@ -11,7 +11,7 @@ namespace RVP.Infrastructure.Persistence
     {
         public static void AddServiceLayerIoc(this IServiceCollection services)
         {
-            #region Repositorios IOC
+            #region Services IOC
             services.AddTransient<IPoliticalLeadersService, PoliticalLeadersService>();
             services.AddTransient<IAllianceService, AllianceService >();
             services.AddTransient<IPoliticalPartiesService, PoliticalPartiesService>();

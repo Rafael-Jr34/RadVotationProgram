@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RVP.Core.Domain.Interfaces.BasicInterfaces;
+using RVP.Infrastructure.Persistence.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace RVP.Infrastructure.Persistence.Repositories.Basic_repositories
 {
-    public class EditRepository<Entity, Context> : 
-        GenericRepository<Entity, Context>, 
+    public class EditRepository<Entity> : 
+        GenericRepository<Entity>, 
         IEdit<Entity>
         where Entity : class
-        where Context : DbContext
+
     {
-        private readonly Context _context;
-        public EditRepository(Context context) : base(context)
+        private readonly AppDBContext _context;
+        public EditRepository(AppDBContext context) : base(context)
         {
             _context = context;
         }

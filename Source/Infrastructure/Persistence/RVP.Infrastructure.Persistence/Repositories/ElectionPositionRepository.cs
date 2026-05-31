@@ -8,10 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RVP.Infrastructure.Persistence.Repository
+namespace RVP.Infrastructure.Persistence.Repositories
 {
 
-    public class ElectionPositionRepository : GenericRepository<ElectionPosition, AppDBContext>, IElectionPositionRepository
+    public class ElectionPositionRepository : GenericRepository<ElectionPosition>, IElectionPositionRepository
     {
 
         public ElectionPositionRepository(AppDBContext context) : base(context)

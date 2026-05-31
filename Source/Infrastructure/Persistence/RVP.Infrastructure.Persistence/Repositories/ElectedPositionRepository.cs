@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RVP.Infrastructure.Persistence.Repositories
 {
-    public class ElectedPositionRepository : EditRepository<ElectedPosition, AppDBContext>, IElectedPositionRepository
+    public class ElectedPositionRepository : EditRepository<ElectedPosition>, IElectedPositionRepository
     {
         public ElectedPositionRepository(AppDBContext context) : base(context)
         {

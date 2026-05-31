@@ -13,6 +13,6 @@ namespace RVP.Core.Domain.Interfaces.BasicInterfaces
         IQueryable<T> GetAllQuery();
         Task<List<T>> GetListWithInclude(List<string> properties);
         IQueryable<T> GetQueryWithInclude(List<string> properties);
-       Task AddAsync(T entity);
+       Task<T> AddAsync(T entity);
     }
 }

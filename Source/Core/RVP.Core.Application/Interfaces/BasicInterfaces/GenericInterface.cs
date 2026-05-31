@@ -9,14 +9,12 @@ namespace RVP.Core.Application.Interfaces.BasicInterfaces
   public   interface GenericInterface<T>  where T: class
     {
         Task<T?> GetByIdAsync(int id);
-        Task<List<T>> GetAllAsync();
-        IQueryable<T> GetQuery();
-        IQueryable<T> GetAllQuery();
-        Task<List<T>> GetListWithInclude(List<string> properties);
-        IQueryable<T> GetEueryWithInclude(List<string> properties);
+        Task<List<T>?> GetAllAsync();
+
+        Task<List<T>> GetAllWithInclude();
        
-        Task AddAsync(T entity);
-      
-        void Delete(T entity);
+        Task<bool> AddAsync(T entity);
+
+        Task<bool> Desactive(int id);
     }
 }

@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RVP.Infrastructure.Persistence.Repository
+namespace RVP.Infrastructure.Persistence.Repositories
 {
-    public class VotesRepository : EditRepository<Votes, AppDBContext>, IVotesRepository
+    public class VotesRepository : EditRepository<Votes>, IVotesRepository
     {
         public VotesRepository(AppDBContext context) : base(context)
         {

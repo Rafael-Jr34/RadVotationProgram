@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RVP.Infrastructure.Persistence.Repositories
 {
-   public class PoliticalLeadersRepository: GenericRepository<PoliticalLeaders, AppDBContext>, IPoliticalLeadersRepository
+   public class PoliticalLeadersRepository: GenericRepository<PoliticalLeaders>, IPoliticalLeadersRepository
     {
         public PoliticalLeadersRepository(AppDBContext context) : base(context)
         {

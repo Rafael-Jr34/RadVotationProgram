@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace RVP.Core.Application.Interfaces.BasicInterfaces
 {
-    public interface IEdit<T>: GenericInterface<T> where T: class
+    public interface IServiceEdit<T>: GenericInterface<T> where T: class
     {// some entities mustn't edit, so this is for the  ones that can
-        void Edit(T entity);
+        Task<bool> Edit(T entity);
     }
 }

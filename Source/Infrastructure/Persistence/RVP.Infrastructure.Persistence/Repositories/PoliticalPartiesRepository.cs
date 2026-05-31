@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RVP.Infrastructure.Persistence.Repository
+namespace RVP.Infrastructure.Persistence.Repositories
 {
-    public class PoliticalPartiesRepository : EditRepository<PoliticalParties, AppDBContext>, IPoliticalPartiesRepository
+    public class PoliticalPartiesRepository : EditRepository<PoliticalParties>, IPoliticalPartiesRepository
     {
         public PoliticalPartiesRepository(AppDBContext context) : base(context)
         {

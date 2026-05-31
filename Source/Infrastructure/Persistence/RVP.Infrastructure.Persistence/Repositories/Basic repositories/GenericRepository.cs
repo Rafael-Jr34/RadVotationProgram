@@ -9,19 +9,20 @@ using System.Threading.Tasks;
 
 namespace RVP.Infrastructure.Persistence.Repositories.Basic_repositories
 {
-    public class GenericRepository<Entity, Context> : IGenericRepository<Entity>
+    public class GenericRepository<Entity> : IGenericRepository<Entity>
         where Entity : class
-        where Context : DbContext
+        
     {
-        private readonly Context _context;
-        public GenericRepository(Context context)
+        private readonly AppDBContext _context;
+        public GenericRepository(AppDBContext context)
         {
             _context = context;
         }
-        public async Task AddAsync(Entity entity)
+        public async Task<Entity> AddAsync(Entity entity)
         {
             await _context.Set<Entity>().AddAsync(entity);
             await _context.SaveChangesAsync();
+            return entity;
 
         }
 
