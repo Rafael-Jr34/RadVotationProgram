@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RVP.Core.Application.ViewModels
+namespace RVP.Core.Application.ViewModels.User
 {
     public class UserViewModel : EmailViewModel
     {

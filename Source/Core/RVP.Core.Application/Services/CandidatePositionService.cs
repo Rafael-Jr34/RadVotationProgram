@@ -15,7 +15,7 @@ namespace RVP.Core.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> Desactive(int id)
+        public Task<bool> ChangeState(int id)
         {
             throw new NotImplementedException();
         }

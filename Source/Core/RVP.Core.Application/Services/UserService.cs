@@ -39,14 +39,14 @@ namespace RVP.Core.Application.Services
                 }
                 return true;
             }
-            catch (Exception ex) 
+            catch (Exception ) 
             {
                 return false;
 
             }
         }
 
-        public async Task<bool> Desactive(int id)
+        public async Task<bool> ChangeState(int id)
         {
             try
             {
@@ -56,7 +56,8 @@ namespace RVP.Core.Application.Services
                 {
                     return false;
                 }
-                entity.IsActive = false;
+
+               entity.IsActive = entity.IsActive == false ? true : false;
                 User? returnEntity = await _userRepository.Edit(entity.Id, entity);
                 if (returnEntity == null)
                 {

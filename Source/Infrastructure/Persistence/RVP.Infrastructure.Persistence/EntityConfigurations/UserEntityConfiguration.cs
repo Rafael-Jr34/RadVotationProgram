@@ -15,6 +15,7 @@ namespace RVP.Infrastructure.Persistence.EntityConfigurations
             #region Basic configuration
             builder.HasKey(u => u.Id);
             builder.ToTable("Users");
+            builder.HasIndex(u => u.Username).IsUnique();
             #endregion
 
             #region Property configuration

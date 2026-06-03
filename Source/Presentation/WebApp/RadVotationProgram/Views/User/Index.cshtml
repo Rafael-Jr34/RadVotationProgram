@@ -3,51 +3,66 @@
     ViewData["Title"] = "User Maintenance";
 }
 
-<div class="container text-center">
-    <div class="row align-items-start">
-        <div class="col">
-            Name
+<div class="container mt-4">
+
+    @if (Model == null || !Model.Any())
+    { 
+    <div class="text-center">
         </div>
-        <div class="col">
-            LastName
+        <div class="card text-center">
+            <div class="card-header text-body-secondary">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">No users found</h5>
+                <a asp-controller="User" asp-action="Create" class="btn btn-primary btn-lg px-5 py-3"  role="button"> Create New User</a>
+            </div>
+            <div class="card-footer text-body-secondary">
+
+            </div>
         </div>
-        <div class="col">
-            Email
-        </div>
-        <div class="col">
-            UserName
-        </div>
-        <div class="col">
-            State
-        </div>
-        <div class="col">
-            Actions
-        </div>
-    </div>
-    @foreach (var user in Model)
+    }   
+    else
     {
-        <div class="row align-items-start">
-            <div class="col">
-                @user.Name
-            </div>
-            <div class="col">
-                @user.LastName
-            </div>
-            <div class="col">
-                @user.Email
-            </div>
-            <div class="col">
-                @user.Username
-            </div>
-            <div class="col">
-                <span class="badge @(user.IsActive == true ? "bg-success" : "bg-danger")">
-                    @(user.IsActive == true ? "Active" : "InActive")
-                </span>
-            </div>
-            <div class="col">
-                <a asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
-            </div>
+        <div class="rounded-table-wrapper">
+            <table class="table table-bordered table-striped text-center rounded-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>User Name</th>
+                        <th>State</th>
+                        <th>Actions</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Name</td>
+                            <td>@user.LastName</td>
+                            <td>@user.Email</td>
+                            <td>@user.Username</td>
+                            <td>
+                                <span class="badge @(user.IsActive ? "bg-success" : "bg-danger") rounded-table-badge">
+                                    @(user.IsActive ? "Active" : "InActive")
+                                </span>
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a asp-action="Edit" asp-route-id="@user.Id"
+                                       class="btn btn-outline-primary btn-sm rounded-table-btn flex-fill">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@user.Id"
+                                       class="btn @(user.IsActive ? "btn-outline-danger" : "btn-outline-success") btn-sm rounded-table-btn flex-fill">
+                                        @(user.IsActive ? "Desactive" : "Active")
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-	}
+    }
+
 </div>

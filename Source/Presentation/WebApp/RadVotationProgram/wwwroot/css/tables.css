@@ -1,0 +1,51 @@
+/* Contenedor con bordes redondeados */
+.rounded-table-wrapper {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Tabla general */
+.rounded-table {
+    font-size: 1.05rem;
+    margin-bottom: 0;
+}
+
+    /* Header */
+    .rounded-table thead tr th {
+        background-color: #4e73df;
+        color: white;
+        border: none;
+        padding: 14px;
+    }
+
+    /* Quitar fondo gris del striped */
+    .rounded-table tbody tr {
+        background-color: #ffffff !important;
+    }
+
+        /* Celdas */
+        .rounded-table tbody tr td {
+            border-color: #e3e6f0;
+            padding: 12px;
+            vertical-align: middle;
+        }
+
+/* Badges */
+.rounded-table-badge {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+/* Botones */
+.rounded-table-btn {
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+.rounded-table-btn {
+    border-radius: 20px;
+    font-size: 0.9rem;
+    min-width: 90px; /* ? tamaño mínimo igual para ambos */
+    text-align: center;
+}

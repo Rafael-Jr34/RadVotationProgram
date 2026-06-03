@@ -15,6 +15,6 @@ namespace RVP.Core.Application.Interfaces.BasicInterfaces
        
         Task<bool> AddAsync(T entity);
 
-        Task<bool> Desactive(int id);
+        Task<bool> ChangeState(int id);
     }
 }

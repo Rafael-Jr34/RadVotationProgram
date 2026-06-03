@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RVP.Core.Application.Dtos.User;
 using RVP.Core.Application.Interfaces;
-using RVP.Core.Application.ViewModels;
+using RVP.Core.Application.ViewModels.User;
+using RVP.Core.Domain.Commun.Enums;
 
 namespace RadVotationProgram.Controllers
 {
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        private UserController(IUserService userService)
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
@@ -27,25 +29,49 @@ namespace RadVotationProgram.Controllers
 
 
             }).ToList();
-            return View();
+            return View(userlist);
         }
         public async Task<IActionResult> Create()
-        {
-            return View();
+        {//the user name is the key for the next login module
+            return View("Save",new SaveUserViewModel() 
+                { Email="", 
+                  Name="",
+                  LastName="",
+                  Password="",
+                  VerifiedPassword="", 
+                  Role="",
+                  Username=""});
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int id)
+        public async Task<IActionResult> Create(SaveUserViewModel vm)
         {
-            return View();
+            if(!ModelState.IsValid)
+            {
+                return View("Save", vm);
+            }
+            var role = vm.Role != "A" ? Role.POLITICAL_LEADER : Role.ADMIN;
+            UserDto dto = new UserDto
+            {
+                Id = vm.Id,
+                Email = vm.Email,
+                Password = vm.Password,
+                Role = (byte)role,
+                Username = vm.Username,
+                Name = vm.Name,
+                LastName = vm.LastName,
+                IsActive = true
+            };
+            await _userService.AddAsync(dto);
+            return RedirectToRoute(new {controller="User", action="Index"});
         }
 
-        public async Task<IActionResult> Delete()
+        public async Task<IActionResult> Status()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Status(int id)
         {
             return View();
         }
