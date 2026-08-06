@@ -1,7 +1,7 @@
 /* Contenedor con bordes redondeados */
 .rounded-table-wrapper {
     border-radius: 16px;
-    overflow: hidden;
+    overflow-x: auto;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
@@ -9,6 +9,8 @@
 .rounded-table {
     font-size: 1.05rem;
     margin-bottom: 0;
+    width: 100%;
+    min-width: 600px;
 }
 
     /* Header */
@@ -17,6 +19,7 @@
         color: white;
         border: none;
         padding: 14px;
+        white-space: nowrap;
     }
 
     /* Quitar fondo gris del striped */
@@ -29,6 +32,7 @@
             border-color: #e3e6f0;
             padding: 12px;
             vertical-align: middle;
+            white-space: nowrap;
         }
 
 /* Badges */
@@ -42,10 +46,62 @@
 .rounded-table-btn {
     border-radius: 20px;
     font-size: 0.9rem;
-}
-.rounded-table-btn {
-    border-radius: 20px;
-    font-size: 0.9rem;
-    min-width: 90px; /* ? tamaño mínimo igual para ambos */
+    min-width: 90px;
     text-align: center;
+}
+
+/* ?? Tablet (max 768px) ?? */
+@media (max-width: 768px) {
+    .rounded-table {
+        font-size: 0.9rem;
+    }
+
+        .rounded-table thead tr th {
+            padding: 10px 8px;
+        }
+
+        .rounded-table tbody tr td {
+            padding: 8px;
+        }
+
+    .rounded-table-btn {
+        font-size: 0.8rem;
+        min-width: 70px;
+        padding: 4px 8px;
+    }
+
+    .rounded-table-badge {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+}
+
+/* ?? Móvil (max 480px) ?? */
+@media (max-width: 480px) {
+    .rounded-table-wrapper {
+        border-radius: 10px;
+    }
+
+    .rounded-table {
+        font-size: 0.8rem;
+    }
+
+        .rounded-table thead tr th {
+            padding: 8px 6px;
+        }
+
+        .rounded-table tbody tr td {
+            padding: 6px;
+        }
+
+    .rounded-table-btn {
+        font-size: 0.75rem;
+        min-width: 60px;
+        padding: 3px 6px;
+    }
+
+    .rounded-table-badge {
+        font-size: 0.75rem;
+        padding: 3px 6px;
+    }
 }

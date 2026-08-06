@@ -13,10 +13,11 @@ namespace RadVotationProgram.Controllers
         {
             _userService = userService;
         }
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var dtos = await _userService.GetAllAsync();
-            List<UserViewModel> userlist = dtos.Select(dto => new UserViewModel
+            List<UserViewModel> userlist = dtos!.Select(dto => new UserViewModel
             {
                 Id = dto.Id,
                 Email = dto.Email,
@@ -31,7 +32,9 @@ namespace RadVotationProgram.Controllers
             }).ToList();
             return View(userlist);
         }
-        public async Task<IActionResult> Create()
+
+        [HttpGet]
+        public IActionResult Create()
         {//the user name is the key for the next login module
             return View("Save",new SaveUserViewModel() 
                 { Email="", 
@@ -46,6 +49,7 @@ namespace RadVotationProgram.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(SaveUserViewModel vm)
         {
+           
             if(!ModelState.IsValid)
             {
                 return View("Save", vm);
@@ -63,27 +67,84 @@ namespace RadVotationProgram.Controllers
                 IsActive = true
             };
             await _userService.AddAsync(dto);
-            return RedirectToRoute(new {controller="User", action="Index"});
+            return RedirectToRoute(new { controller = "User", action = "Index" });
         }
-
-        public async Task<IActionResult> Status()
-        {
-            return View();
-        }
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Status(int id)
         {
-            return View();
+            UserDto? dto = await _userService.GetByIdAsync(id);
+            if (dto == null)
+            {
+                return View("Index");
+            }
+            ViewBag.Status = dto.IsActive; //1 for active, 0 for inactive
+            StatusUserViewModel vm = new StatusUserViewModel
+                {
+                    Id = id,
+                    Name = dto.Name,
+
+                };
+
+            return  View("Status", vm);
         }
-        public async Task<IActionResult> Edit()
+        [HttpPost]
+        public async Task<IActionResult> Status(StatusUserViewModel vm)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View("Status", vm);
+            }
+            await _userService.ChangeState(vm.Id);
+            return RedirectToRoute(new { controller = "User", action = "Index" });
+
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            ViewBag.EditOn = true;
+            UserDto? dto = await _userService.GetByIdAsync(id);
+            if (dto == null)
+            {
+                return View("Index");
+            }
+            var role = dto.Role == (byte)Role.POLITICAL_LEADER ? "B" : "A";
+            SaveUserViewModel vm = new SaveUserViewModel
+            {
+                Id = id,
+                Password = dto.Password,
+                VerifiedPassword = dto.Password,
+                Name = dto.Name,
+                LastName = dto.LastName,
+                Role = role,
+                Username = dto.Username,
+                Email = dto.Email
+
+            };
+            return View("Save", vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(SaveUserViewModel vm)
         {
-            return View();
+            ViewBag.EditOn = true;
+            if (!ModelState.IsValid)
+            {
+                return View("Save", vm);
+            }
+            var role = vm.Role != "A" ? Role.POLITICAL_LEADER : Role.ADMIN;
+            UserDto dto = new UserDto
+            {
+                Id = vm.Id,
+                Email = vm.Email,
+                Password = vm.Password,
+                Role = (byte)role,
+                Username = vm.Username,
+                Name = vm.Name,
+                LastName = vm.LastName,
+                IsActive = true
+            };
+            await _userService.Edit(dto);
+            return RedirectToRoute(new { controller = "User", action = "Index" });
 
         }
     }

@@ -1,5 +1,29 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model StatusUserViewModel
 @{
+	bool status = ViewBag.Status;
+    ViewData["Title"] = "User Maintenance";
 }
+<div class="col-12 col-md-6 offset-md-3 ">
+    <div class="card" @(status ? "border-danger" : "border-success")>
+        <div class="card-header @(status ? "bg-danger" : "bg-success") text-light">
+            <h5 class="text-center">
+                Are you sure you want to @(status ? $"desactive" : "active") the user @Model.Name
+            </h5>
+        </div>
+        <div class="card-body  ">
+
+            <form class="row g-3" asp-controller="User" asp-action="Status" method="POST">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="Name" />
+             
+                <div class="col-12">
+                    <a asp-controller="User" asp-action="Index" class="btn btn-outline-warning float-end">Go Back</a>
+                    <button type="submit" class="btn @(status ? "btn-danger" : "btn-success")  float-end me-2">@(status ? $"Desactive" : "Active") </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

@@ -11,16 +11,16 @@ namespace RVP.Core.Application.ViewModels.User
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "You most enter a user name")]
+        [Required(ErrorMessage = "You must enter a user name")]
         public required string Name { get; set; }
 
-        [Required(ErrorMessage = "You most enter a last name.")]
+        [Required(ErrorMessage = "You must enter a last name.")]
         public required string LastName { get; set; }
 
-        [Required(ErrorMessage = "You most enter an Email.")]
+        [Required(ErrorMessage = "You must enter an Email.")]
         public required string Email { get; set; }
 
-        [Required(ErrorMessage = "You most enter a password.")]
+        [Required(ErrorMessage = "You must enter a password.")]
         public required string Password { get; set; }
 
 
@@ -29,7 +29,7 @@ namespace RVP.Core.Application.ViewModels.User
         public required string VerifiedPassword { get; set; }
 
 
-        [Required(ErrorMessage = "You must selct a role.")]
+        [Required(ErrorMessage = "You must select a role.")]
         public required string Role { get; set; }
 
         [Required(ErrorMessage = "You must enter a user name the password")]
