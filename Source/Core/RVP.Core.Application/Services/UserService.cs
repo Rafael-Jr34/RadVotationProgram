@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using RVP.Core.Application.Dtos.User;
 using RVP.Core.Application.Interfaces;
+using RVP.Core.Application.Interfaces.HelpersInterfaces;
 using RVP.Core.Domain.Entities;
-using RVP.Core.Domain.Commun.Enums;
 using RVP.Core.Domain.Interfaces;
-using System.Threading.Tasks;
+
 
 
 namespace RVP.Core.Application.Services
@@ -12,9 +12,11 @@ namespace RVP.Core.Application.Services
    public class  UserService: IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private readonly IPasswordEncyptor _passwordEncyptor;
+        public UserService(IUserRepository userRepository, IPasswordEncyptor passwordEncyptor)
         {
             _userRepository = userRepository;
+            _passwordEncyptor = passwordEncyptor;
         }
 
         public async Task<bool> AddAsync(UserDto dto)
@@ -28,7 +30,7 @@ namespace RVP.Core.Application.Services
                     Email = dto.Email,
                     IsActive = true,
                     LastName = dto.LastName,
-                    Password = dto.Password,
+                    Password = _passwordEncyptor.HashPassword(dto.Password),
                     Role = dto.Role,
                     Username = dto.Username
                 };
@@ -77,6 +79,10 @@ namespace RVP.Core.Application.Services
         {
             try
             {
+                User? bdEntity = await _userRepository.GetByIdAsync(dto.Id);
+                if (bdEntity == null) { return false;}
+
+
                 User entity = new()
                 {
                     Id = 0,
@@ -84,11 +90,11 @@ namespace RVP.Core.Application.Services
                     Email = dto.Email,
                     IsActive = true,
                     LastName = dto.LastName,
-                    Password = dto.Password,
+                    Password = string.IsNullOrEmpty(dto.Password)? bdEntity.Password : dto.Password,
                     Role = dto.Role,
                     Username = dto.Username
                 };
-               User? returnEntity = await _userRepository.Edit(entity.Id, entity);
+               User? returnEntity = await _userRepository.Edit(bdEntity.Id, entity);
                 if (returnEntity == null)
                 {
                     return false;

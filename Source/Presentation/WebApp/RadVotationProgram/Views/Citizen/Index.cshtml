@@ -1,0 +1,36 @@
+﻿@model CitizenLoginViewModel
+@{
+
+    ViewData["Title"] = "Citizen Login Page";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h2 class="card-title text-center mb-4">Login</h2>
+
+                    <form asp-asp-controller="Citizen" asp-action="Login" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="IdentityNumber" class="form-label">Identity Number</label>
+                            <input asp-for="IdentityNumber"
+                                   type="text"
+                                   inputmode="numeric"
+                                   class="form-control"
+                                   placeholder="Enter identity number"
+                                   required />
+                            <span asp-validation-for="IdentityNumber" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Vote</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

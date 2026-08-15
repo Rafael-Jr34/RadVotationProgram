@@ -33,7 +33,7 @@ namespace RadVotationProgram
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=User}/{action=Index}/{id?}")
+                pattern: "{controller=Citizen}/{action=Index}")
                 .WithStaticAssets();
 
             app.Run();

@@ -36,21 +36,23 @@ namespace RadVotationProgram.Controllers
         [HttpGet]
         public IActionResult Create()
         {//the user name is the key for the next login module
-            return View("Save",new SaveUserViewModel() 
-                { Email="", 
-                  Name="",
-                  LastName="",
-                  Password="",
-                  VerifiedPassword="", 
-                  Role="",
-                  Username=""});
+            return View("Save", new SaveUserViewModel()
+            {
+                Email = "",
+                Name = "",
+                LastName = "",
+                Password = "",
+                VerifiedPassword = "",
+                Role = "",
+                Username = ""
+            });
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(SaveUserViewModel vm)
         {
-           
-            if(!ModelState.IsValid)
+
+            if (!ModelState.IsValid)
             {
                 return View("Save", vm);
             }
@@ -69,6 +71,7 @@ namespace RadVotationProgram.Controllers
             await _userService.AddAsync(dto);
             return RedirectToRoute(new { controller = "User", action = "Index" });
         }
+
         [HttpGet]
         public async Task<IActionResult> Status(int id)
         {
@@ -79,14 +82,15 @@ namespace RadVotationProgram.Controllers
             }
             ViewBag.Status = dto.IsActive; //1 for active, 0 for inactive
             StatusUserViewModel vm = new StatusUserViewModel
-                {
-                    Id = id,
-                    Name = dto.Name,
+            {
+                Id = id,
+                Name = dto.Name,
 
-                };
+            };
 
-            return  View("Status", vm);
+            return View("Status", vm);
         }
+
         [HttpPost]
         public async Task<IActionResult> Status(StatusUserViewModel vm)
         {
@@ -98,6 +102,7 @@ namespace RadVotationProgram.Controllers
             return RedirectToRoute(new { controller = "User", action = "Index" });
 
         }
+
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -108,7 +113,7 @@ namespace RadVotationProgram.Controllers
                 return View("Index");
             }
             var role = dto.Role == (byte)Role.POLITICAL_LEADER ? "B" : "A";
-            SaveUserViewModel vm = new SaveUserViewModel
+            EditUserViewModel vm = new EditUserViewModel
             {
                 Id = id,
                 Password = dto.Password,
@@ -124,7 +129,7 @@ namespace RadVotationProgram.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SaveUserViewModel vm)
+        public async Task<IActionResult> Edit(EditUserViewModel vm)
         {
             ViewBag.EditOn = true;
             if (!ModelState.IsValid)
@@ -135,8 +140,8 @@ namespace RadVotationProgram.Controllers
             UserDto dto = new UserDto
             {
                 Id = vm.Id,
-                Email = vm.Email,
-                Password = vm.Password,
+                Email = vm.Email, 
+                Password = (string.IsNullOrEmpty( vm.Password)) ? vm.Password! : "", 
                 Role = (byte)role,
                 Username = vm.Username,
                 Name = vm.Name,
@@ -146,6 +151,24 @@ namespace RadVotationProgram.Controllers
             await _userService.Edit(dto);
             return RedirectToRoute(new { controller = "User", action = "Index" });
 
+        }
+
+        [HttpPost]
+        public IActionResult Login(UserLoginViewModel vm)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("Index", vm);
+            }
+
+            return RedirectToRoute(new { controller = "User", action = "Index" });
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View("Login", new UserLoginViewModel { Name = "", Password = "" });
         }
     }
 
