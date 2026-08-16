@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using RVP.Core.Application.Common;
+using RVP.Core.Application.Common.Enums;
 using RVP.Core.Application.Dtos.User;
 using RVP.Core.Application.Interfaces;
 using RVP.Core.Application.Interfaces.HelpersInterfaces;
@@ -28,7 +31,7 @@ namespace RVP.Core.Application.Services
                     Id = 0,
                     Name = dto.Name,
                     Email = dto.Email,
-                    IsActive = true,
+                    IsActive = false,
                     LastName = dto.LastName,
                     Password = _passwordEncyptor.HashPassword(dto.Password),
                     Role = dto.Role,
@@ -59,7 +62,7 @@ namespace RVP.Core.Application.Services
                     return false;
                 }
 
-               entity.IsActive = entity.IsActive == false ? true : false;
+               entity.IsActive = entity.IsActive ? false : true;
                 User? returnEntity = await _userRepository.Edit(entity.Id, entity);
                 if (returnEntity == null)
                 {
@@ -161,6 +164,37 @@ namespace RVP.Core.Application.Services
 
             }
         }
+        public async Task<ServiceResult<UserLoginDto>> ConfirmUser(UserLoginDto dto)
+        {
+            try
+            {
+                var   user = await _userRepository.GetAllQuery().Where(us => us.Username == dto.Name).FirstOrDefaultAsync();
+                if(user == null)
+                {
+                    return ServiceResult<UserLoginDto>.Fail(ServiceErrorCode.InvalidCredentials);
+                }
+
+                string password = user.Password;                          
+                bool isValid = _passwordEncyptor.VerifyPassword(dto.Password, password);
+                if (isValid) {
+
+                    if(!user.IsActive)
+                    {
+                        return ServiceResult<UserLoginDto>.Fail(ServiceErrorCode.UserNotActive);
+                    }
+                    else
+                    {
+                        return ServiceResult<UserLoginDto>.Ok(dto);
+                    }
+                }
+                return ServiceResult<UserLoginDto>.Fail(ServiceErrorCode.InvalidCredentials);
+                
+            }
+            catch (Exception)
+            {
+                return ServiceResult<UserLoginDto>.Fail(ServiceErrorCode.ValidationError );
+            }
+        }
 
         public async Task<UserDto?> GetByIdAsync(int id)
         {
@@ -168,7 +202,7 @@ namespace RVP.Core.Application.Services
             {
 
                 User? entity = await _userRepository.GetByIdAsync(id);
-              
+              if( entity == null) return null;
                 User? returnEntity = await _userRepository.Edit(entity.Id, entity);
                 if (returnEntity == null)
                 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RVP.Core.Domain.Commun.Enums
+namespace RVP.Core.Domain.Common.Enums
 {
     public enum Statuses
     {

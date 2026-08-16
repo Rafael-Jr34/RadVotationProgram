@@ -7,14 +7,14 @@
     <div class="card" @(status ? "border-danger" : "border-success")>
         <div class="card-header @(status ? "bg-danger" : "bg-success") text-light">
             <h5 class="text-center">
-                Are you sure you want to @(status ? $"desactive" : "active") the user @Model.Name
+                Are you sure you want to @(status ? $"desactive" : "active") the user @Model.UserName
             </h5>
         </div>
         <div class="card-body  ">
 
             <form class="row g-3" asp-controller="User" asp-action="Status" method="POST">
                 <input type="hidden" asp-for="Id" />
-                <input type="hidden" asp-for="Name" />
+                <input type="hidden" asp-for="UserName" />
              
                 <div class="col-12">
                     <a asp-controller="User" asp-action="Index" class="btn btn-outline-warning float-end">Go Back</a>

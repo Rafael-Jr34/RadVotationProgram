@@ -1,6 +1,8 @@
 ﻿ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RVP.Core.Application.Helpers;
 using RVP.Core.Application.Interfaces;
+using RVP.Core.Application.Interfaces.HelpersInterfaces;
 using RVP.Core.Application.Services;
    
 
@@ -25,6 +27,8 @@ namespace RVP.Infrastructure.Persistence
             services.AddTransient<IElectionService, ElectionService>();
             services.AddTransient<IElectionCandidatesService, ElectionCandidatesService>();
             services.AddTransient<IElectionPositionService, ElectionPositionService>();
+            services.AddTransient<IPasswordEncyptor, PasswordEncryptor>();
+
 
             #endregion
         }

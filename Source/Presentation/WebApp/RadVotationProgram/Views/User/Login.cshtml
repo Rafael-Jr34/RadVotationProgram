@@ -1,7 +1,8 @@
 ﻿@model UserLoginViewModel
 @{
-
+	string error = ViewBag.ErrorMessage ?? string.Empty;
     ViewData["Title"] = "User Login Page";
+
 }
 
 <div class="container mt-5">
@@ -10,6 +11,13 @@
             <div class="card shadow-sm">
                 <div class="card-body p-4">
                     <h2 class="card-title text-center mb-4">User Login</h2>
+                    @if (!string.IsNullOrEmpty(error))
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+                            @error
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
 
                     <form asp-asp-controller="User" asp-action="Login" method="post">
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>

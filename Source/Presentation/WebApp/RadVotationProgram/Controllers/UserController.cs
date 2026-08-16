@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RVP.Core.Application.Dtos.User;
+using RVP.Core.Application.Helpers;
 using RVP.Core.Application.Interfaces;
 using RVP.Core.Application.ViewModels.User;
-using RVP.Core.Domain.Commun.Enums;
+using RVP.Core.Domain.Common.Enums;
+using System.Threading.Tasks;
 
 namespace RadVotationProgram.Controllers
 {
@@ -13,6 +15,7 @@ namespace RadVotationProgram.Controllers
         {
             _userService = userService;
         }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -84,7 +87,7 @@ namespace RadVotationProgram.Controllers
             StatusUserViewModel vm = new StatusUserViewModel
             {
                 Id = id,
-                Name = dto.Name,
+                UserName = dto.Username,
 
             };
 
@@ -154,21 +157,34 @@ namespace RadVotationProgram.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(UserLoginViewModel vm)
+        public async Task<IActionResult> Login(UserLoginViewModel vm)
         {
 
             if (!ModelState.IsValid)
             {
-                return View("Index", vm);
+                return View(vm);
+            }
+            UserLoginDto dto = new UserLoginDto
+            {
+                Name = vm.Name,
+                Password = vm.Password
+            };
+
+            var result = await _userService.ConfirmUser(dto);
+            if (result.Success) {
+                return RedirectToAction("Index");
+                
             }
 
-            return RedirectToRoute(new { controller = "User", action = "Index" });
+            ViewBag.ErrorMessage = result.ErrorCode.ToUserMessage();
+            return View(vm);
         }
 
         [HttpGet]
         public IActionResult Login()
         {
-            return View("Login", new UserLoginViewModel { Name = "", Password = "" });
+
+            return View( new UserLoginViewModel { Name = "", Password = "" });
         }
     }
 
