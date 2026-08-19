@@ -11,7 +11,7 @@ namespace RVP.Core.Application.Interfaces.BasicInterfaces
         Task<T?> GetByIdAsync(int id);
         Task<List<T>?> GetAllAsync();
 
-        Task<List<T>> GetAllWithInclude();
+        Task<List<T>?> GetAllWithInclude();
        
         Task<bool> AddAsync(T entity);
 

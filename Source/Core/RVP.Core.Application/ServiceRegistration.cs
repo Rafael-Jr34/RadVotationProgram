@@ -1,10 +1,13 @@
-﻿ using Microsoft.Extensions.Configuration;
+﻿using Mapster;
+using MapsterMapper;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RVP.Core.Application.Helpers;
 using RVP.Core.Application.Interfaces;
 using RVP.Core.Application.Interfaces.HelpersInterfaces;
 using RVP.Core.Application.Services;
-   
+using System.Reflection;
+
 
 
 namespace RVP.Infrastructure.Persistence
@@ -13,6 +16,12 @@ namespace RVP.Infrastructure.Persistence
     {
         public static void AddServiceLayerIoc(this IServiceCollection services)
         {
+            #region Configurations
+            var mapsterConfig = new TypeAdapterConfig();
+            mapsterConfig.Scan(Assembly.GetExecutingAssembly());
+            services.AddSingleton(mapsterConfig);
+            services.AddScoped<IMapper, ServiceMapper>();
+            #endregion
             #region Services IOC
             services.AddTransient<IPoliticalLeadersService, PoliticalLeadersService>();
             services.AddTransient<IAllianceService, AllianceService >();

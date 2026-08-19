@@ -20,12 +20,12 @@ namespace RVP.Core.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<ElectionCandidates>> GetAllAsync()
+        public Task<List<ElectionCandidates>?> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<ElectionCandidates>> GetAllWithInclude()
+        public Task<List<ElectionCandidates>?> GetAllWithInclude()
         {
             throw new NotImplementedException();
         }

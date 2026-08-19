@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+ using Microsoft.AspNetCore.Mvc;
 using RadVotationProgram.Models;
 using RVP.Core.Application.ViewModels.Citizen;
 using System.Diagnostics;

@@ -20,11 +20,11 @@ namespace RVP.Core.Application.ViewModels.User
         [Required(ErrorMessage = "You must enter an Email.")]
         public required string Email { get; set; }
 
-        [Required(ErrorMessage = "You must enter a password.")]
+       
         public string? Password { get; set; }
 
 
-        [Required(ErrorMessage = "You must confirm the password")]
+        
         [Compare("Password", ErrorMessage = "Passwords do not match")]
         public  string? VerifiedPassword { get; set; }
 

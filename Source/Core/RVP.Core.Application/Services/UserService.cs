@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using MapsterMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using RVP.Core.Application.Common;
 using RVP.Core.Application.Common.Enums;
 using RVP.Core.Application.Dtos.User;
@@ -16,27 +17,22 @@ namespace RVP.Core.Application.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordEncyptor _passwordEncyptor;
-        public UserService(IUserRepository userRepository, IPasswordEncyptor passwordEncyptor)
+        private readonly IMapper _mapper;
+        public UserService(IMapper mapper , IUserRepository userRepository, IPasswordEncyptor passwordEncyptor)
         {
             _userRepository = userRepository;
             _passwordEncyptor = passwordEncyptor;
+            _mapper = mapper;
         }
 
         public async Task<bool> AddAsync(UserDto dto)
         {
             try
             {
-                User entity = new()
-                {
-                    Id = 0,
-                    Name = dto.Name,
-                    Email = dto.Email,
-                    IsActive = false,
-                    LastName = dto.LastName,
-                    Password = _passwordEncyptor.HashPassword(dto.Password),
-                    Role = dto.Role,
-                    Username = dto.Username
-                };
+
+                User entity = _mapper.Map<User>(dto);
+                entity.Password = _passwordEncyptor.HashPassword(dto.Password);
+                               
                 User? returnEntity = await _userRepository.AddAsync(entity);
                 if (returnEntity == null)
                 {
@@ -84,20 +80,12 @@ namespace RVP.Core.Application.Services
             {
                 User? bdEntity = await _userRepository.GetByIdAsync(dto.Id);
                 if (bdEntity == null) { return false;}
+                var trueState = bdEntity.IsActive;
+                User entity = _mapper.Map<User>(dto);
+                entity.Password = string.IsNullOrEmpty(dto.Password) ? bdEntity.Password : dto.Password;
+                entity.IsActive = trueState;
 
-
-                User entity = new()
-                {
-                    Id = 0,
-                    Name = dto.Name,
-                    Email = dto.Email,
-                    IsActive = true,
-                    LastName = dto.LastName,
-                    Password = string.IsNullOrEmpty(dto.Password)? bdEntity.Password : dto.Password,
-                    Role = dto.Role,
-                    Username = dto.Username
-                };
-               User? returnEntity = await _userRepository.Edit(bdEntity.Id, entity);
+                User? returnEntity = await _userRepository.Edit(bdEntity.Id, entity);
                 if (returnEntity == null)
                 {
                     return false;
@@ -116,17 +104,8 @@ namespace RVP.Core.Application.Services
             try
             {
                var listEntities = await _userRepository.GetAllAsync();
-                var listEntitiesDto = listEntities.Select(entity => new UserDto
-                {
-                    Id = entity.Id,
-                    Name = entity.Name,
-                    Email = entity.Email,
-                    IsActive = entity.IsActive,
-                    LastName = entity.LastName,
-                    Password = entity.Password,
-                    Role = entity.Role,
-                    Username = entity.Username
-                }).ToList();
+                var listEntitiesDto = _mapper.Map<List<UserDto>>(listEntities);
+
 
                 return listEntitiesDto;
             }
@@ -137,22 +116,13 @@ namespace RVP.Core.Application.Services
             }
         }
 
-        public async Task<List<UserDto>> GetAllWithInclude()
+        public async Task<List<UserDto>?> GetAllWithInclude()
         {
             try
             {
                 var listEntities = await _userRepository.GetListWithInclude(new List<string> { "PoliticalLeaders" }); 
-                var listEntitiesDto = listEntities.Select(entity => new UserDto
-                {
-                    Id = entity.Id,
-                    Name = entity.Name,
-                    Email = entity.Email,
-                    IsActive = entity.IsActive,
-                    LastName = entity.LastName,
-                    Password = entity.Password,
-                    Role = entity.Role,
-                    Username = entity.Username
-                }).ToList();
+                var listEntitiesDto =  _mapper.Map<List<UserDto>>(listEntities);
+                  
 
                 // tenrary operartor: this != null ? that : listEntitiesDto;
                 // si eso no es igual a null, entonces haz esto, sino haz esto otro
@@ -209,17 +179,8 @@ namespace RVP.Core.Application.Services
                     return null;
                 }
 
-                UserDto dto = new()
-                {
-                    Id = returnEntity.Id,
-                    Name = returnEntity.Name,
-                    Email = returnEntity.Email,
-                    IsActive = returnEntity.IsActive,
-                    LastName = returnEntity.LastName,
-                    Password = returnEntity.Password,
-                    Role = returnEntity.Role,
-                    Username = returnEntity.Username
-                };
+                UserDto dto = _mapper.Map<UserDto>(returnEntity);
+               
                 return dto;
             }
             catch (Exception)

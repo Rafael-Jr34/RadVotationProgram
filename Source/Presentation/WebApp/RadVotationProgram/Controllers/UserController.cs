@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MapsterMapper;
+using Microsoft.AspNetCore.Mvc;
 using RVP.Core.Application.Dtos.User;
 using RVP.Core.Application.Helpers;
 using RVP.Core.Application.Interfaces;
@@ -11,28 +12,20 @@ namespace RadVotationProgram.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly IMapper _mapper;
+        public UserController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var dtos = await _userService.GetAllAsync();
-            List<UserViewModel> userlist = dtos!.Select(dto => new UserViewModel
-            {
-                Id = dto.Id,
-                Email = dto.Email,
-                Password = dto.Password,
-                Role = dto.Role,
-                Username = dto.Username,
-                Name = dto.Name,
-                LastName = dto.LastName,
-                IsActive = dto.IsActive
-
-
-            }).ToList();
+            
+            List<UserViewModel>? userlist = dtos !=null ? _mapper.Map<List<UserViewModel>>(dtos) : null;
+           
             return View(userlist);
         }
 
@@ -60,19 +53,12 @@ namespace RadVotationProgram.Controllers
                 return View("Save", vm);
             }
             var role = vm.Role != "A" ? Role.POLITICAL_LEADER : Role.ADMIN;
-            UserDto dto = new UserDto
-            {
-                Id = vm.Id,
-                Email = vm.Email,
-                Password = vm.Password,
-                Role = (byte)role,
-                Username = vm.Username,
-                Name = vm.Name,
-                LastName = vm.LastName,
-                IsActive = true
-            };
+            UserDto dto = _mapper.Map<UserDto>(vm);
+            dto.Role = (byte)role;
+
+           
             await _userService.AddAsync(dto);
-            return RedirectToRoute(new { controller = "User", action = "Index" });
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -102,55 +88,38 @@ namespace RadVotationProgram.Controllers
                 return View("Status", vm);
             }
             await _userService.ChangeState(vm.Id);
-            return RedirectToRoute(new { controller = "User", action = "Index" });
+            return RedirectToAction("Index");
 
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            ViewBag.EditOn = true;
+            
             UserDto? dto = await _userService.GetByIdAsync(id);
             if (dto == null)
             {
                 return View("Index");
             }
             var role = dto.Role == (byte)Role.POLITICAL_LEADER ? "B" : "A";
-            EditUserViewModel vm = new EditUserViewModel
-            {
-                Id = id,
-                Password = dto.Password,
-                VerifiedPassword = dto.Password,
-                Name = dto.Name,
-                LastName = dto.LastName,
-                Role = role,
-                Username = dto.Username,
-                Email = dto.Email
-
-            };
-            return View("Save", vm);
+            EditUserViewModel vm = _mapper.Map<EditUserViewModel>(dto);
+            vm.Role = role;
+        
+            return View(vm);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(EditUserViewModel vm)
         {
-            ViewBag.EditOn = true;
+           
             if (!ModelState.IsValid)
             {
-                return View("Save", vm);
+                return View(vm);
             }
             var role = vm.Role != "A" ? Role.POLITICAL_LEADER : Role.ADMIN;
-            UserDto dto = new UserDto
-            {
-                Id = vm.Id,
-                Email = vm.Email, 
-                Password = (string.IsNullOrEmpty( vm.Password)) ? vm.Password! : "", 
-                Role = (byte)role,
-                Username = vm.Username,
-                Name = vm.Name,
-                LastName = vm.LastName,
-                IsActive = true
-            };
+            UserDto dto = _mapper.Map<UserDto>(vm);
+            dto.Role = (byte)role;
+           
             await _userService.Edit(dto);
             return RedirectToRoute(new { controller = "User", action = "Index" });
 
@@ -164,11 +133,7 @@ namespace RadVotationProgram.Controllers
             {
                 return View(vm);
             }
-            UserLoginDto dto = new UserLoginDto
-            {
-                Name = vm.Name,
-                Password = vm.Password
-            };
+            UserLoginDto dto = _mapper.Map<UserLoginDto>(vm);       
 
             var result = await _userService.ConfirmUser(dto);
             if (result.Success) {
