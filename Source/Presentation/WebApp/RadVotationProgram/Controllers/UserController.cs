@@ -1,11 +1,10 @@
 ﻿using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
 using RVP.Core.Application.Dtos.User;
-using RVP.Core.Application.Helpers;
 using RVP.Core.Application.Interfaces;
 using RVP.Core.Application.ViewModels.User;
 using RVP.Core.Domain.Common.Enums;
-using System.Threading.Tasks;
+
 
 namespace RadVotationProgram.Controllers
 {
@@ -125,32 +124,8 @@ namespace RadVotationProgram.Controllers
 
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Login(UserLoginViewModel vm)
-        {
-
-            if (!ModelState.IsValid)
-            {
-                return View(vm);
-            }
-            UserLoginDto dto = _mapper.Map<UserLoginDto>(vm);       
-
-            var result = await _userService.ConfirmUser(dto);
-            if (result.Success) {
-                return RedirectToAction("Index");
-                
-            }
-
-            ViewBag.ErrorMessage = result.ErrorCode.ToUserMessage();
-            return View(vm);
-        }
-
-        [HttpGet]
-        public IActionResult Login()
-        {
-
-            return View( new UserLoginViewModel { Name = "", Password = "" });
-        }
+        
     }
 
 }
+ 

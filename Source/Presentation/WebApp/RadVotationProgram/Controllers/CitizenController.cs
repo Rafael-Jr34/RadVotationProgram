@@ -14,16 +14,6 @@ public class CitizenController : Controller
     }
 
 
-    [HttpPost]
-    public IActionResult Login(CitizenLoginViewModel vm)
-    {
-
-        if (!ModelState.IsValid)
-        {
-            return View("Index", vm);
-        }
-       
-        return RedirectToRoute(new { controller = "User", action = "Index" });
-    }
+  
 
 }
