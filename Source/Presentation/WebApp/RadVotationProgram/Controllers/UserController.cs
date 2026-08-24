@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RVP.Core.Application.Dtos.User;
 using RVP.Core.Application.Interfaces;
+using RVP.Core.Application.Interfaces.HelpersInterfaces;
 using RVP.Core.Application.ViewModels.User;
 using RVP.Core.Domain.Common.Enums;
 
@@ -12,15 +13,25 @@ namespace RadVotationProgram.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
-        public UserController(IUserService userService, IMapper mapper)
+        private readonly IUserSession _userSession;
+        public UserController(IUserService userService, IMapper mapper, IUserSession userSession)
         {
             _userService = userService;
             _mapper = mapper;
+            _userSession = userSession;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            #region Verication UserSesion
+            var (hasUser, action) = VerificationUserSession();
+            if (!hasUser)
+            {
+                return action!;
+
+            }
+            #endregion
             var dtos = await _userService.GetAllAsync();
             
             List<UserViewModel>? userlist = dtos !=null ? _mapper.Map<List<UserViewModel>>(dtos) : null;
@@ -30,7 +41,17 @@ namespace RadVotationProgram.Controllers
 
         [HttpGet]
         public IActionResult Create()
-        {//the user name is the key for the next login module
+        {
+            #region Verication UserSesion
+            var (hasUser, action) = VerificationUserSession();
+            if (!hasUser)
+            {
+                return action!;
+
+            }
+            #endregion
+
+            //the user name is the key for the next login module
             return View("Save", new SaveUserViewModel()
             {
                 Email = "",
@@ -46,6 +67,14 @@ namespace RadVotationProgram.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(SaveUserViewModel vm)
         {
+            #region Verication UserSesion
+            var (hasUser, action) = VerificationUserSession();
+            if (!hasUser)
+            {
+                return action!;
+
+            }
+            #endregion
 
             if (!ModelState.IsValid)
             {
@@ -63,6 +92,15 @@ namespace RadVotationProgram.Controllers
         [HttpGet]
         public async Task<IActionResult> Status(int id)
         {
+            #region Verication UserSesion
+            var (hasUser, action) = VerificationUserSession();
+            if (!hasUser)
+            {
+                return action!;
+
+            }
+            #endregion
+
             UserDto? dto = await _userService.GetByIdAsync(id);
             if (dto == null)
             {
@@ -82,6 +120,15 @@ namespace RadVotationProgram.Controllers
         [HttpPost]
         public async Task<IActionResult> Status(StatusUserViewModel vm)
         {
+            #region Verication UserSesion
+            var (hasUser, action) = VerificationUserSession();
+            if (!hasUser)
+            {
+                return action!;
+
+            }
+            #endregion
+
             if (!ModelState.IsValid)
             {
                 return View("Status", vm);
@@ -94,7 +141,15 @@ namespace RadVotationProgram.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            
+            #region Verication UserSesion
+            var (hasUser, action) = VerificationUserSession();
+            if (!hasUser)
+            {
+                return action!;
+
+            }
+            #endregion
+
             UserDto? dto = await _userService.GetByIdAsync(id);
             if (dto == null)
             {
@@ -110,7 +165,16 @@ namespace RadVotationProgram.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditUserViewModel vm)
         {
-           
+            #region Verication UserSesion
+            var (hasUser, action) = VerificationUserSession();
+            if (!hasUser)
+            {
+                return action!;
+
+            }
+            #endregion
+
+
             if (!ModelState.IsValid)
             {
                 return View(vm);
@@ -123,8 +187,20 @@ namespace RadVotationProgram.Controllers
             return RedirectToRoute(new { controller = "User", action = "Index" });
 
         }
+        private  (bool, ActionResult?) VerificationUserSession()
+        {
+            var hasUser = true;
+            if (!_userSession.HasUser())
+            {
+                hasUser = false;
+                return (hasUser, RedirectToRoute(new { controller = "Login", action = "LoginUser" }));
 
-        
+            }
+            return (hasUser, null);
+            
+        }
+
+
     }
 
 }

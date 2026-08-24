@@ -6,7 +6,7 @@ namespace RVP.Core.Application.Interfaces
 {
    public  interface IUserService: IServiceEdit<UserDto> 
     {
-        Task<ServiceResult<UserLoginDto>>ConfirmUser(UserLoginDto dto);
+        Task<ServiceResult<UserDto>>ConfirmUser(UserLoginDto dto);
     }
 
 }

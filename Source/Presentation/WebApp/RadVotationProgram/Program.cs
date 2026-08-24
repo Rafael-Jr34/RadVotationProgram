@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using RadVotationProgram.Middlewares;
+using RVP.Core.Application.Interfaces.HelpersInterfaces;
 using RVP.Infrastructure.Persistence;
 using RVP.Infrastructure.Persistence.Context;
 
@@ -15,6 +17,13 @@ namespace RadVotationProgram
             builder.Services.AddControllersWithViews();
             builder.Services.AddPersistenceLayerIoc(builder.Configuration);
             builder.Services.AddServiceLayerIoc();
+            builder.Services.AddSession(opt =>
+                { opt.IOTimeout = TimeSpan.FromMinutes(60); //Just one hour of sesion activiness
+                  opt.Cookie.HttpOnly = true; //just work with http
+                });
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.AddScoped<IUserSession, UserSession>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -27,6 +36,7 @@ namespace RadVotationProgram
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 

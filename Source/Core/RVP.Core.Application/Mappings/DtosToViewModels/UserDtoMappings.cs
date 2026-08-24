@@ -33,7 +33,10 @@ namespace RVP.Core.Application.Mappings.DtosToViewModels
                      src => string.IsNullOrEmpty( src.Password) ? "" : src.Password)
                 .Map(dest => dest.IsActive, src => false);
 
-            mapper.NewConfig<UserLoginViewModel, UserDto>(); 
+            mapper.NewConfig<UserLoginViewModel, UserDto>();
+
+            mapper.NewConfig<UserDto, UserSessionViewModel>()
+                .Ignore(nameof(UserDto.Password));
 
 
 

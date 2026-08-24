@@ -134,35 +134,36 @@ namespace RVP.Core.Application.Services
 
             }
         }
-        public async Task<ServiceResult<UserLoginDto>> ConfirmUser(UserLoginDto dto)
+        public async Task<ServiceResult<UserDto>> ConfirmUser(UserLoginDto dto)
         {
             try
             {
                 var   user = await _userRepository.GetAllQuery().Where(us => us.Username == dto.Name).FirstOrDefaultAsync();
+                  
                 if(user == null)
                 {
-                    return ServiceResult<UserLoginDto>.Fail(ServiceErrorCode.InvalidCredentials);
+                    return ServiceResult<UserDto>.Fail(ServiceErrorCode.InvalidCredentials);
                 }
 
                 string password = user.Password;                          
                 bool isValid = _passwordEncyptor.VerifyPassword(dto.Password, password);
                 if (isValid) {
-
-                    if(!user.IsActive)
+                    UserDto? Userdto = _mapper.Map<UserDto>(user);
+                    if (!user.IsActive)
                     {
-                        return ServiceResult<UserLoginDto>.Fail(ServiceErrorCode.UserNotActive);
+                        return ServiceResult<UserDto>.Fail(ServiceErrorCode.UserNotActive);
                     }
                     else
                     {
-                        return ServiceResult<UserLoginDto>.Ok(dto);
+                        return ServiceResult<UserDto>.Ok(Userdto);
                     }
                 }
-                return ServiceResult<UserLoginDto>.Fail(ServiceErrorCode.InvalidCredentials);
+                return ServiceResult<UserDto>.Fail(ServiceErrorCode.InvalidCredentials);
                 
             }
             catch (Exception)
             {
-                return ServiceResult<UserLoginDto>.Fail(ServiceErrorCode.ValidationError );
+                return ServiceResult<UserDto>.Fail(ServiceErrorCode.ValidationError );
             }
         }
 
