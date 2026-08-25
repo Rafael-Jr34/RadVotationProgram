@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using RVP.Core.Application.Interfaces.HelpersInterfaces
+
+@inject IUserSession userSession;
+@{
+    var User = userSession.GetUserSession();
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,7 +31,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">User Maintenance</a>
                         </li>
 
-                        
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="LogoutUser">Log out @User?.Username </a>
+                        </li>
+
                     </ul>
                 </div>
             </div>

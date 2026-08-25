@@ -79,6 +79,12 @@ namespace RadVotationProgram.Controllers
             return View("Login",new UserLoginViewModel { Name = "", Password = "" });
         }
 
+        public IActionResult LogoutUser()
+        {
+            HttpContext.Session.Remove("User");
+            return RedirectToAction("LoginUser");
+        }
+
         [HttpPost]
         public IActionResult LoginCitizen(CitizenLoginViewModel vm)
         {
