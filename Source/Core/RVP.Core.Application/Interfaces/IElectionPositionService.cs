@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RVP.Core.Application.Interfaces
 {
-   public  interface IElectionPositionService: GenericInterface<ElectionPosition>
+   public  interface IElectionPositionService: IGenericService<ElectionPosition>
     {
     }
 }

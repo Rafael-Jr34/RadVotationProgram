@@ -13,19 +13,19 @@ using RVP.Core.Domain.Interfaces;
 
 namespace RVP.Core.Application.Services
 {
-   public class  UserService: IUserService
+   public class  UserService: EditService<User, UserDto>, IUserService  
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordEncyptor _passwordEncyptor;
         private readonly IMapper _mapper;
-        public UserService(IMapper mapper , IUserRepository userRepository, IPasswordEncyptor passwordEncyptor)
+        public UserService(IMapper mapper , IUserRepository userRepository, IPasswordEncyptor passwordEncyptor): base(mapper, userRepository)
         {
             _userRepository = userRepository;
             _passwordEncyptor = passwordEncyptor;
             _mapper = mapper;
         }
 
-        public async Task<bool> AddAsync(UserDto dto)
+        public override async Task<bool> AddAsync(UserDto dto)
         {
             try
             {
@@ -47,34 +47,8 @@ namespace RVP.Core.Application.Services
             }
         }
 
-        public async Task<bool> ChangeState(int id)
-        {
-            try
-            {
-              
-                User? entity = await _userRepository.GetByIdAsync(id);
-                if (entity == null)
-                {
-                    return false;
-                }
 
-               entity.IsActive = entity.IsActive ? false : true;
-                User? returnEntity = await _userRepository.Edit(entity.Id, entity);
-                if (returnEntity == null)
-                {
-                    return false;
-                }
-
-            return true;
-            }
-            catch (Exception )
-            {
-                return false;
-
-            }
-        }
-
-        public async Task<bool> Edit(UserDto dto)
+        public override async Task<bool> Edit(UserDto dto)
         {
             try
             {
@@ -99,22 +73,7 @@ namespace RVP.Core.Application.Services
             }
         }
 
-        public async Task<List<UserDto>?> GetAllAsync()
-        {
-            try
-            {
-               var listEntities = await _userRepository.GetAllAsync();
-                var listEntitiesDto = _mapper.Map<List<UserDto>>(listEntities);
 
-
-                return listEntitiesDto;
-            }
-            catch (Exception)
-            {
-                return null;
-
-            }
-        }
 
         public async Task<List<UserDto>?> GetAllWithInclude()
         {
@@ -167,29 +126,7 @@ namespace RVP.Core.Application.Services
             }
         }
 
-        public async Task<UserDto?> GetByIdAsync(int id)
-        {
-            try
-            {
-
-                User? entity = await _userRepository.GetByIdAsync(id);
-              if( entity == null) return null;
-                User? returnEntity = await _userRepository.Edit(entity.Id, entity);
-                if (returnEntity == null)
-                {
-                    return null;
-                }
-
-                UserDto dto = _mapper.Map<UserDto>(returnEntity);
-               
-                return dto;
-            }
-            catch (Exception)
-            {
-                return null;
-
-            }
-        }
+      
 
     }
 }

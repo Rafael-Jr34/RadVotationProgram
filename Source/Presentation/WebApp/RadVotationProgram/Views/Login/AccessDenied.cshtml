@@ -1,0 +1,24 @@
+﻿@using RVP.Core.Application.Interfaces.HelpersInterfaces
+@using RVP.Core.Domain.Common.Enums
+
+@inject IUserSession userSession;
+@{
+    var User = userSession.GetUserSession();
+}
+@{
+    bool isAdmin = true;
+    bool status = ViewBag.Status;
+    ViewData["Title"] = "User Maintenance";
+    if (User?.Role != (int)Role.ADMIN){
+        Layout = "_LayoutPolticalLeader";
+        isAdmin = false;
+    }
+
+    <div clas ="text-center">
+    <h1 class="display-4">Access denied</h1>
+    <p>Your user does not have permission to access this section - <a asp-controller="@(isAdmin ?"User" : "PoliticalLeader")" asp-action="Index"></a></p>
+    </div>
+
+
+
+

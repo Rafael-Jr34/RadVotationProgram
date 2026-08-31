@@ -1,6 +1,7 @@
 ﻿using RVP.Core.Application.ViewModels.User;
 using RVP.Core.Application.Helpers;
 using RVP.Core.Application.Interfaces.HelpersInterfaces;
+using RVP.Core.Domain.Common.Enums;
 
 
 namespace RadVotationProgram.Middlewares
@@ -34,6 +35,18 @@ namespace RadVotationProgram.Middlewares
                 return null;
             }
             return userSession;
+
+        }
+
+        public bool IsAdmin()
+        {
+            UserSessionViewModel? userSession = _httpContextAccessor.HttpContext?
+                .Session.Get<UserSessionViewModel>("User");
+            if (userSession == null)
+            {
+                return false;
+            }
+            return userSession.Role ==(byte)Role.ADMIN ? true : false;
 
         }
     }

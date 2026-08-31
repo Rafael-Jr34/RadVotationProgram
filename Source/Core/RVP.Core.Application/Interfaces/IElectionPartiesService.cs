@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RVP.Core.Application.Interfaces
 {
-   public  interface IElectionPartiesService: GenericInterface<ElectionParties>
+   public  interface IElectionPartiesService: IGenericService<ElectionParties>
     {
     }
 }

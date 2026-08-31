@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RVP.Core.Domain.Interfaces
 {
-   public  interface IUserRepository: IEdit<User>
+   public  interface IUserRepository: IEditRepository<User>
     {
     }
 }

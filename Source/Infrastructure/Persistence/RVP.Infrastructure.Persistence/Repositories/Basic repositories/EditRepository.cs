@@ -11,7 +11,7 @@ namespace RVP.Infrastructure.Persistence.Repositories.Basic_repositories
 {
     public class EditRepository<Entity> : 
         GenericRepository<Entity>, 
-        IEdit<Entity>
+        IEditRepository<Entity>
         where Entity : class
 
     {

@@ -6,5 +6,6 @@ namespace RVP.Core.Application.Interfaces.HelpersInterfaces
     {
         UserSessionViewModel? GetUserSession();
         bool HasUser();
+        bool IsAdmin();
     }
 }

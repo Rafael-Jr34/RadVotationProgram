@@ -96,5 +96,15 @@ namespace RadVotationProgram.Controllers
 
             return RedirectToRoute(new { controller = "Citizen", action = "Index" });
         }
+
+        
+        public IActionResult AccessDenied(CitizenLoginViewModel vm)
+        {
+            if (_userSession.HasUser())
+            {
+                 return View();
+            }
+          return RedirectToRoute(new { controller = "Citizen", action = "Index" });
+        }
     }
 }

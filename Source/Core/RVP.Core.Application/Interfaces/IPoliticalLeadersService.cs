@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RVP.Core.Application.Interfaces
 {
-   public  interface IPoliticalLeadersService: GenericInterface<PoliticalLeaders>
+   public  interface IPoliticalLeadersService: IGenericService<PoliticalLeaders>
     {
     }
 }
