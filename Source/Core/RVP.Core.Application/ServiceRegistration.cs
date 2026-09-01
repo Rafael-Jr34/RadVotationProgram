@@ -28,20 +28,20 @@ namespace RVP.Infrastructure.Persistence
             #endregion
             #region Services IOC
             services.AddScoped(typeof(IGenericService<>),typeof( GenericService<,>));
-            services.AddTransient<IPoliticalLeadersService, PoliticalLeadersService>();
-            services.AddTransient<IAllianceService, AllianceService >();
-            services.AddTransient<IPoliticalPartiesService, PoliticalPartiesService>();
-            services.AddTransient<IElectionPartiesService, ElectionPartiesService>();
-            services.AddTransient<ICandidateService, CandidateService>();
-            services.AddTransient<IVotesService, VotesService>();
-            services.AddTransient<ICitizenService, CitizenService>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<ICandidatePositionService, CandidatePositionService>();
-            services.AddTransient<IElectedPositionService, ElectedPositionService>();
-            services.AddTransient<IElectionService, ElectionService>();
-            services.AddTransient<IElectionCandidatesService, ElectionCandidatesService>();
-            services.AddTransient<IElectionPositionService, ElectionPositionService>();
-            services.AddTransient<IPasswordEncyptor, PasswordEncryptor>();
+            services.AddScoped<IPoliticalLeadersService, PoliticalLeadersService>();
+            services.AddScoped<IAllianceService, AllianceService >();
+            services.AddScoped<IPoliticalPartiesService, PoliticalPartiesService>();
+            services.AddScoped<IElectionPartiesService, ElectionPartiesService>();
+            services.AddScoped<ICandidateService, CandidateService>();
+            services.AddScoped<IVotesService, VotesService>();
+            services.AddScoped<ICitizenService, CitizenService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICandidatePositionService, CandidatePositionService>();
+            services.AddScoped<IElectedPositionService, ElectedPositionService>();
+            services.AddScoped<IElectionService, ElectionService>();
+            services.AddScoped<IElectionCandidatesService, ElectionCandidatesService>();
+            services.AddScoped<IElectionPositionService, ElectionPositionService>();
+            services.AddScoped<IPasswordEncyptor, PasswordEncryptor>();
             
             #endregion
         }

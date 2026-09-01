@@ -36,20 +36,20 @@ namespace RVP.Infrastructure.Persistence
 
             #endregion
             #region Repositories IOC
-            services.AddTransient<IPoliticalPartiesRepository, PoliticalPartiesRepository>();
-            services.AddTransient<IPoliticalLeadersRepository, PoliticalLeadersRepository>();
-            services.AddTransient<IElectionPartiesRepository, ElectionPartiesRepository>();
-            services.AddTransient<ICandidateRepository, CandidateRepository>();
-            services.AddTransient<IVotesRepository, VotesRepository>();
-            services.AddTransient<ICitizenRepository, CitizenRepository>();
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IAllianceRepository, AllianceRepository>();
-            services.AddTransient<ICandidatePositionRepository, CandidatePositionRepository>();
-            services.AddTransient<IElectedPositionRepository, ElectedPositionRepository>(); 
-            services.AddTransient<IElectionRepository, ElectionRepository>();
-            services.AddTransient<IElectionCandidatesRepository, ElectionCandidatesRepository>();
-            services.AddTransient<IVotesRepository, VotesRepository>();
-            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IPoliticalPartiesRepository, PoliticalPartiesRepository>();
+            services.AddScoped<IPoliticalLeadersRepository, PoliticalLeadersRepository>();
+            services.AddScoped<IElectionPartiesRepository, ElectionPartiesRepository>();
+            services.AddScoped<ICandidateRepository, CandidateRepository>();
+            services.AddScoped<IVotesRepository, VotesRepository>();
+            services.AddScoped<ICitizenRepository, CitizenRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAllianceRepository, AllianceRepository>();
+            services.AddScoped<ICandidatePositionRepository, CandidatePositionRepository>();
+            services.AddScoped<IElectedPositionRepository, ElectedPositionRepository>(); 
+            services.AddScoped<IElectionRepository, ElectionRepository>();
+            services.AddScoped<IElectionCandidatesRepository, ElectionCandidatesRepository>();
+            services.AddScoped<IVotesRepository, VotesRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             
             #endregion
         }
