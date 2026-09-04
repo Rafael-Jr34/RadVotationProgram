@@ -1,0 +1,66 @@
+﻿@model List<ElectoralPositionViewModel>
+@{
+    ViewData["Title"] = "Elective Position Maintenance";
+}
+
+<div class="container mt-4">
+
+    @if (Model == null || !Model.Any())
+    { 
+    <div class="text-center">
+        </div>
+        <div class="card text-center">
+            <div class="card-header text-body-secondary">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">No electoral position found</h5>
+                <a asp-controller="User" asp-action="Create" class="btn btn-primary btn-lg px-5 py-3"  role="button"> Create New elective position</a>
+            </div>
+            <div class="card-footer text-body-secondary">
+
+            </div>
+        </div>
+    }   
+    else
+    {
+        <div class="card-body mb-3">
+            <a asp-controller="ElectoralPositionController" asp-action="Create" class="btn btn-primary  px-4 py-2" role="button"> Create New User</a>
+        </div>
+        <div class="rounded-table-wrapper table-responsive">
+            <table class="table table-bordered table-striped text-center rounded-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>                       
+                        <th>Description</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var electoralPosition in Model)
+                    {
+                        <tr>
+                            <td>@electoralPosition.Name</td>
+                            <td>@electoralPosition.Description</td>
+                           
+                            <td>
+                                <span class="badge @(electoralPosition.IsActive ? "bg-success" : "bg-danger") rounded-table-badge">
+                                    @(electoralPosition.IsActive ? "Active" : "InActive")
+                                </span>
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a asp-controller="ElectoralPosition" asp-action="Edit" asp-route-id="@electoralPosition.Id"
+                                       class="btn btn-outline-primary btn-sm rounded-table-btn flex-fill">Edit</a>
+                                    <a asp-controller="ElectoralPosition" asp-action="Status" asp-route-id="@electoralPosition.Id"
+                                       class="btn @(electoralPosition.IsActive ? "btn-outline-danger" : "btn-outline-success") btn-sm rounded-table-btn flex-fill">
+                                        @(electoralPosition.IsActive ? "Desactive" : "Active")
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+</div>

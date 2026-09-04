@@ -1,43 +1,21 @@
-﻿using RVP.Core.Application.Interfaces;
+﻿using MapsterMapper;
+using RVP.Core.Application.Dtos.ElectedPosition;
+using RVP.Core.Application.Interfaces;
 using RVP.Core.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RVP.Core.Domain.Interfaces;
+
 
 namespace RVP.Core.Application.Services
 {
-    public class ElectedPositionService : IElectedPositionService
+    public class ElectedPositionService : EditService<ElectedPosition, ElectedPositionDto>, IElectedPositionService
     {
-        public Task<bool> AddAsync(ElectedPosition entity)
+        private readonly IElectedPositionRepository _electedPositionRepository;
+    
+        private readonly IMapper _mapper;
+        public ElectedPositionService(IMapper mapper, IElectedPositionRepository electedPositionRepository) : base(mapper, electedPositionRepository)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> ChangeState(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> Edit(ElectedPosition entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<ElectedPosition>?> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<ElectedPosition>?> GetAllWithInclude()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ElectedPosition?> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
+            _electedPositionRepository = electedPositionRepository;
+            _mapper = mapper;
         }
     }
 }
