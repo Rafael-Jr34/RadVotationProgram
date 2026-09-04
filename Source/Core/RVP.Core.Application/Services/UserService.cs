@@ -1,6 +1,5 @@
 ﻿using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using RVP.Core.Application.Common;
 using RVP.Core.Application.Common.Enums;
 using RVP.Core.Application.Dtos.User;

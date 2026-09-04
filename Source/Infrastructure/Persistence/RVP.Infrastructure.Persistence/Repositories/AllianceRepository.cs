@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using RVP.Core.Domain.Entities;
 using RVP.Core.Domain.Entities.Interfaces;
 using RVP.Infrastructure.Persistence.Context;

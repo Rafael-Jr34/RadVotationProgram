@@ -1,12 +1,6 @@
 ﻿using Mapster;
 using RVP.Core.Application.Dtos.User;
 using RVP.Core.Application.ViewModels.User;
-using RVP.Core.Domain.Common.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RVP.Core.Application.Mappings.DtosToViewModels
 {

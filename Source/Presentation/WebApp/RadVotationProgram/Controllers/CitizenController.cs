@@ -1,7 +1,5 @@
- using Microsoft.AspNetCore.Mvc;
-using RadVotationProgram.Models;
+using Microsoft.AspNetCore.Mvc;
 using RVP.Core.Application.ViewModels.Citizen;
-using System.Diagnostics;
 
 namespace RadVotationProgram.Controllers;
 

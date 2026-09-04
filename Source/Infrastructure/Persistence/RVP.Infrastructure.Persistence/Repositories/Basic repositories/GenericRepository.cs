@@ -1,11 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RVP.Core.Domain.Interfaces.BasicInterfaces;
 using RVP.Infrastructure.Persistence.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace RVP.Infrastructure.Persistence.Repositories.Basic_repositories
 {

@@ -1,9 +1,5 @@
 ﻿using RVP.Core.Domain.Entities.BasicEntities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace RVP.Core.Domain.Entities
 { //a candidate can run for another allies parties , is need to know for which party he is running

@@ -1,10 +1,5 @@
 ﻿using RVP.Core.Application.Interfaces;
 using RVP.Core.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RVP.Core.Application.Services
 {

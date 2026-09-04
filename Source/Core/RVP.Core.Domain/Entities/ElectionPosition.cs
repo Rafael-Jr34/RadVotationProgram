@@ -1,9 +1,4 @@
 ﻿using RVP.Core.Domain.Entities.BasicEntities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RVP.Core.Domain.Entities
 { //these are the positions that are actived in an active election 

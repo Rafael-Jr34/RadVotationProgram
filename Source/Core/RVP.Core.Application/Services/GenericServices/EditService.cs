@@ -1,16 +1,7 @@
 ﻿using MapsterMapper;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using RVP.Core.Application.Common;
-using RVP.Core.Application.Common.Enums;
-using RVP.Core.Application.Dtos.User;
-using RVP.Core.Application.Interfaces;
 using RVP.Core.Application.Interfaces.BasicInterfaces;
-using RVP.Core.Application.Interfaces.HelpersInterfaces;
-using RVP.Core.Domain.Entities;
 using RVP.Core.Domain.Entities.BasicDtos;
 using RVP.Core.Domain.Entities.BasicEntities;
-using RVP.Core.Domain.Interfaces;
 using RVP.Core.Domain.Interfaces.BasicInterfaces;
 
 

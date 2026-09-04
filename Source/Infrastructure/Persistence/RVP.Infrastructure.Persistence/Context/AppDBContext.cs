@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using RVP.Core.Domain.Entities;
-using RVP.Infrastructure.Persistence.EntityConfigurations;
 using System.Reflection;
 
 namespace RVP.Infrastructure.Persistence.Context

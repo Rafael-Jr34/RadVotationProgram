@@ -1,6 +1,5 @@
 ﻿using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using RVP.Core.Application.Dtos.User;
 using RVP.Core.Application.Helpers;
 using RVP.Core.Application.Interfaces;
